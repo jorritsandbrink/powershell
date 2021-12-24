@@ -46,5 +46,5 @@ Set-Location $IntegrationRuntimeScriptLocation.Directory
 #endregion configure IRT
 
 # Enable remote access, required for cluster setup (multiple nodes)
-Set-Location "C:\Program Files\Microsoft Integration Runtime\4.0\Shared\"
+Set-Location "C:\Program Files\Microsoft Integration Runtime\5.0\Shared"
 .\dmgcmd.exe -EnableRemoteAccess 8060
