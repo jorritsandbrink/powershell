@@ -36,6 +36,10 @@ Write-Host "Installing MSI on $ENV:COMPUTERNAME completed!" -ForegroundColor Gre
 
 #endregion MSI install
 
+# Enable remote access, required for cluster setup (multiple nodes)
+Set-Location "C:\Program Files\Microsoft Integration Runtime\5.0\Shared"
+.\dmgcmd.exe -EnableRemoteAccess 8060
+
 #region configure IRT
 $IntegrationService = Get-Service | Where-Object { $_.Name -match "DIAHostService" }
 If ($IntegrationService.Status -eq "Stopped") { Start-Service $IntegrationService.Name }
@@ -44,7 +48,3 @@ $IntegrationRuntimeScriptLocation = Get-ChildItem -Recurse | Where-Object { $_.N
 Set-Location $IntegrationRuntimeScriptLocation.Directory
 .\RegisterIntegrationRuntime.ps1 -gatewayKey $GatewayKey
 #endregion configure IRT
-
-# Enable remote access, required for cluster setup (multiple nodes)
-Set-Location "C:\Program Files\Microsoft Integration Runtime\5.0\Shared"
-.\dmgcmd.exe -EnableRemoteAccess 8060
