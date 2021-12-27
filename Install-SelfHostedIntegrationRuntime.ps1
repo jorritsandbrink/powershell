@@ -36,7 +36,7 @@ function Install-Gateway([string] $msiPath)
     }
     Start-Sleep -Seconds 30	
 
-    Write-Host "Succeed to install Microsoft Integration Runtime"
+    Write-Host "Microsoft Integration Runtime installed succesfully"
 }
 
 function Register-Gateway([string] $key, [string] $port, [string] $cert)
@@ -45,22 +45,22 @@ function Register-Gateway([string] $key, [string] $port, [string] $cert)
 
     if (![string]::IsNullOrEmpty($port))
     {
-        Write-Host "Start to enable remote access."
+        Write-Host "Start to enable remote access"
         $process = Start-Process $cmd "-era $port $cert" -Wait -PassThru -NoNewWindow
         if ($process.ExitCode -ne 0)
         {
             throw "Failed to enable remote access. Exit code: $($process.ExitCode)"
         }
-        Write-Host "Succeed to enable remote access."
+        Write-Host "Remote access enabled succesfully"
     }
 
-    Write-Host "Start to register Microsoft Integration Runtime with key: $key."
+    Write-Host "Start to register Microsoft Integration Runtime"
     $process = Start-Process $cmd "-k $key" -Wait -PassThru -NoNewWindow
     if ($process.ExitCode -ne 0)
     {
         throw "Failed to register Microsoft Integration Runtime. Exit code: $($process.ExitCode)"
     }
-    Write-Host "Succeed to register Microsoft Integration Runtime."
+    Write-Host "Microsoft Integration Runtime registered succesfully"
 }
 
 function Check-WhetherGatewayInstalled([string]$name)
@@ -99,7 +99,7 @@ function UnInstall-Gateway()
         return
     }
 
-    Write-Host "Microsoft Integration Runtime has been uninstalled from this machine."
+    Write-Host "Microsoft Integration Runtime has been uninstalled from this machine"
 }
 
 function Get-CmdFilePath()
