@@ -3,7 +3,7 @@ Param(
   [string]
   $ApplicationId,
   [Parameter(Mandatory = $true)]
-  [string]
+  [SecureString]
   $ClientSecret
 )
 
