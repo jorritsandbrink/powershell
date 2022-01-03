@@ -24,8 +24,8 @@ $ClientSecretSecure = ConvertTo-SecureString $ClientSecret -AsPlainText -Force
 $RecoveryKeySecure = ConvertTo-SecureString $RecoveryKey -AsPlainText -Force
 
 # Install DataGateway module
-Write-Host "Install DataGateway powershell module"
-Install-Module -Name DataGateway -Force
+# Write-Host "Install DataGateway powershell module"
+# Install-Module -Name DataGateway -Force
 
 # Connect Service Principal
 Write-Host "Connect Service Principal"
