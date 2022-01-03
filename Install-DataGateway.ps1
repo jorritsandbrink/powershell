@@ -27,12 +27,12 @@ $RecoveryKeySecure = ConvertTo-SecureString $RecoveryKey -AsPlainText -Force
 Write-Host "Install DataGateway powershell module"
 Install-Module -Name DataGateway -Force
 
-# Download and run gateway installer
-Install-DataGateway -AcceptConditions
-
 # Connect Service Principal
 Write-Host "Connect Service Principal"
 Connect-DataGatewayServiceAccount -ApplicationId $ApplicationId -ClientSecret $ClientSecretSecure -Tenant $TenantId | Out-Null
+
+# Download and run gateway installer
+Install-DataGateway -AcceptConditions
 
 # Thrown an error if not logged in
 Get-DataGatewayAccessToken | Out-Null
