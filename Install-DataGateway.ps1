@@ -1,4 +1,5 @@
 # Script based on https://www.powershellgallery.com/packages/DataGateway/3000.37.39/Content/Samples%5CInstallAndAddDataGateway-Sample.ps1
+# Requires Service Principal with proper permissions – see https://docs.microsoft.com/en-us/powershell/module/datagateway.profile/connect-datagatewayserviceaccount?view=datagateway-ps#creating-an-azure-ad-application
 
 Param(
   [Parameter(Mandatory = $true)]
