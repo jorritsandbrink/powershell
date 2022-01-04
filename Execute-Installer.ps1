@@ -1,8 +1,8 @@
 [CmdletBinding()]
 param(
-    [Parameter(Mandatory = $false)][string]$msiDownloadURL = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.1/PowerShell-7.2.1-win-x64.msi",
-    [Parameter(Mandatory = $false)][string]$msiFolder = "C:\Temp",
-    [Parameter(Mandatory = $false)][string]$msiFileName = "installer.msi"
+    [Parameter(Mandatory = $false)][string]$MsiDownloadURL = "https://github.com/PowerShell/PowerShell/releases/download/v7.2.1/PowerShell-7.2.1-win-x64.msi",
+    [Parameter(Mandatory = $false)][string]$MsiFolder = "C:\Temp",
+    [Parameter(Mandatory = $false)][string]$MsiFileName = "installer.msi"
 )
 
 function Download-Installer([string]$downloadUrl, [string]$msiFolder, [string]$msiFileName)
@@ -33,5 +33,5 @@ function Execute-Installer([string] $msiPath)
     Write-Host "MSI executed succesfully"
 }
 
-Download-Installer $msiDownloadURL $msiFolder $msiFileName
-Execute-Installer $msiFolder\$msiFileName
+Download-Installer $MsiDownloadURL $MsiFolder $MsiFileName
+Execute-Installer $MsiFolder\$MsiFileName
