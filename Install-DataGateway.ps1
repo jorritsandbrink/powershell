@@ -1,3 +1,5 @@
+# Script based on https://www.powershellgallery.com/packages/DataGateway/3000.37.39/Content/Samples%5CInstallAndAddDataGateway-Sample.ps1
+
 Param(
   [Parameter(Mandatory = $true)]
   [string]
