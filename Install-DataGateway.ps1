@@ -22,6 +22,16 @@ Param(
   $AdminObjectId
 )
 
+$Date = Get-Date
+$logfile = Join-Path -Path $PSScriptRoot -ChildPath 'Install-DataGateway.log'
+$logRegel = [string]::Format("[{0:MM/dd/yy} {0:HH:mm:ss}] - Starting script Install-DataGateway.ps1", $Date)
+if (Test-Path -Path $logfile) {
+    Add-Content -Path $logfile -Value $logRegel
+} else {
+    $logRegel = [string]::Format("{0}{1}", $logRegel, [Environment]::NewLine)
+    New-Item -Path $logfile -ItemType File -Value $logRegel | Out-Null
+}
+
 # Create SecureString objects
 $ClientSecretSecure = ConvertTo-SecureString $ClientSecret -AsPlainText -Force
 $RecoveryKeySecure = ConvertTo-SecureString $RecoveryKey -AsPlainText -Force
