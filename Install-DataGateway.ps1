@@ -22,6 +22,8 @@ Param(
   $AdminObjectId
 )
 
+$VerbosePreference = "Continue"
+
 $transcriptfile = Join-Path -Path $PSScriptRoot -ChildPath 'transcript0.txt'
 if (Test-Path -Path $transcriptfile) {
 	Start-Transcript -Path $transcriptfile -Append -Force
@@ -35,8 +37,17 @@ $ClientSecretSecure = ConvertTo-SecureString $ClientSecret -AsPlainText -Force
 $RecoveryKeySecure = ConvertTo-SecureString $RecoveryKey -AsPlainText -Force
 
 # Install DataGateway module
-Write-Host "Install DataGateway powershell module"
-Install-Module -Name DataGateway -Force -Verbose
+Write-Host "Install powershell module 'DataGateway'"
+$module = Get-InstalledModule -Name DataGateway -ErrorAction SilentlyContinue
+if($module) {
+	Write-Verbose ("Module 'DataGateway' already installed: {0}" -f $module.InstalledLocation)
+} else {
+	Write-Verbose ("Module 'DataGateway' not found.")
+	Install-Module -Name DataGateway -Scope AllUsers -Force
+}
+
+Write-Host "Import powershell module 'DataGateway'"
+Import-Module -Name DataGateway
 
 # Connect Service Principal
 Write-Host "Connect Service Principal"
