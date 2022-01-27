@@ -22,14 +22,12 @@ Param(
   $AdminObjectId
 )
 
-$Date = Get-Date
-$logfile = Join-Path -Path $PSScriptRoot -ChildPath 'Install-DataGateway.log'
-$logRegel = [string]::Format("[{0:MM/dd/yy} {0:HH:mm:ss}] - Starting script Install-DataGateway.ps1", $Date)
-if (Test-Path -Path $logfile) {
-    Add-Content -Path $logfile -Value $logRegel
-} else {
-    $logRegel = [string]::Format("{0}{1}", $logRegel, [Environment]::NewLine)
-    New-Item -Path $logfile -ItemType File -Value $logRegel | Out-Null
+$transcriptfile = Join-Path -Path $PSScriptRoot -ChildPath 'transcript0.txt'
+if (Test-Path -Path $transcriptfile) {
+	Start-Transcript -Path $transcriptfile -Append -Force
+}
+else {
+	Start-Transcript -Path $transcriptfile -Force
 }
 
 # Create SecureString objects
@@ -38,7 +36,7 @@ $RecoveryKeySecure = ConvertTo-SecureString $RecoveryKey -AsPlainText -Force
 
 # Install DataGateway module
 Write-Host "Install DataGateway powershell module"
-Install-Module -Name DataGateway -Force
+Install-Module -Name DataGateway -Force -Verbose
 
 # Connect Service Principal
 Write-Host "Connect Service Principal"
@@ -69,3 +67,5 @@ if ($null -ne $AdminObjectId) {
   }
   Add-DataGatewayClusterUser @addDataGatewayClusterUserArguments
 }
+
+Stop-Transcript
